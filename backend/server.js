@@ -47,15 +47,17 @@ router.get('/api/services/:id', async (ctx, next) => {
     const body = services[index];
     return fortune(ctx, body);
 });
+
 router.post('/api/services', async (ctx, next) => {
-    const id = ctx.request.body.id;
+    const data = JSON.parse(ctx.request.body);
+    const id = data.id;
     if (id !== 0) {
         const index = services.findIndex(o => o.id === id);
         if (index === -1) {
             const status = 404;
             return fortune(ctx, null, status);
         }
-        services[index] = ctx.request.body;
+        services[index] = data;
         return fortune(ctx, null, 204);
     }
     

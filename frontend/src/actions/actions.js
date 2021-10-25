@@ -71,7 +71,7 @@ export const fetchItemServices = (id) => async (dispatch, getState) => {
             throw new Error(response.statusText);
         }
         const data = await response.json();
-        dispatch(setChangeValuesService(data));
+        dispatch(setChangeValuesService(data))
     } catch(e) {
         console.log('ошибка ', e.message )
         dispatch(addServiceError(e.message));
@@ -83,14 +83,13 @@ export const fetchAddItemServices = (newData, handler) => async (dispatch, getSt
     try {
         const response = await fetch(`${process.env.REACT_APP_CURRENT_URL}/api/services`, {
             method: 'POST',
-            data: JSON.stringify(newData),
+            body: JSON.stringify(newData),
         });
         if (response.status < 200 && response.status >= 300) {
             console.log('ошибка')
             throw new Error(response.statusText);
         }
-        const data = await response.json();
-        dispatch(addServiceSuccess(data));
+        dispatch(addServiceSuccess());
         handler();
     } catch(e) {
         console.log('ошибка ', e.message )
