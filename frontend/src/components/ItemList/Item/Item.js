@@ -15,8 +15,8 @@ function Item(props) {
     const price = numberWithSpaces(item.price);
 
     const handleDelete = () => {
-        setLoading(true)
-        dispatch(fetchServicesDelete(item.id, () => setLoading(false)))
+        setLoading(true);
+        fetchServicesDelete(dispatch, item.id, () => setLoading(false));
     }
 
     return (

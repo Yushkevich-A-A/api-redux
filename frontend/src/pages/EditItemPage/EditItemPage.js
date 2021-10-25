@@ -3,7 +3,7 @@ import LoadingButton from '../../components/Loading/LoadingButton/LoadingButton'
 import { useSelector, useDispatch } from 'react-redux';
 import ErrorFetch from '../../components/Errors/ErrorFetch/ErrorFetch';
 import { Redirect } from 'react-router';
-import { fetchAddItemServices, fetchItemServices, setChangeValuesService } from '../../actions/actions';
+import { fetchAddItemServices, fetchItemServices } from '../../actions/actions';
 import './EditItemPage.css';
 
 
@@ -15,7 +15,8 @@ function EditItemPage(props) {
     const [ isRedirect, setRedirect ] = useState(false);
 
     useEffect(() => {
-        dispatch(fetchItemServices(match.params.id));
+        fetchItemServices(dispatch, match.params.id, (data) => {setValue({...data})});
+        // eslint-disable-next-line
     }, [])
 
     useEffect(() => {
@@ -30,7 +31,7 @@ function EditItemPage(props) {
 
     const handlerSubmit = (e) => {
         e.preventDefault();
-        dispatch(fetchAddItemServices(value, () => setRedirect(!isRedirect)));
+        fetchAddItemServices(dispatch, value, () => setRedirect(!isRedirect));
     }
 
     const handleCancel = () => {

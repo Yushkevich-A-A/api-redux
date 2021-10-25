@@ -12,7 +12,7 @@ function ServicesPage(props) {
     const dispatch = useDispatch();
     
     useEffect(() => {
-        dispatch(fetchServices())
+        fetchServices(dispatch)
     }, [dispatch])
 
     return (
